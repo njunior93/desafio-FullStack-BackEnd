@@ -74,8 +74,8 @@ def atualizar_voluntario(id: int, payload: schemas.VoluntarioUpdate, db: Session
     if not voluntario:
         raise HTTPException(status_code=404, detail="Voluntário não encontrado")
 
-    dados_atualizacao = payload.dict(exclude_unset=True)
-    for chave, valor in dados_atualizacao.items():
+    dado_atualizacao = payload.dict(exclude_unset=True)
+    for chave, valor in dado_atualizacao.items():
         setattr(voluntario, chave, valor)
 
     db.commit()
