@@ -38,22 +38,7 @@ Esta API permite:
 
 ---
 
-# 📂 Estrutura do Projeto
-
-```bash
-backend/
-├── app/
-│   ├── database/
-│   ├── models/
-│   ├── routers/
-│   ├── schemas/
-│   ├── services/
-│   └── main.py
-│
-├── requirements.txt
-├── voluntarios.db
-└── README.md
-```
+([📁 Repositório FrontEnd](https://github.com/njunior93/desafio_fullStack.git))
 
 ---
 
