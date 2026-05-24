@@ -1,6 +1,6 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, ConfigDict
 from datetime import datetime
-from typing import Optional
+from typing import Optional, List
 
 class VoluntarioCreate(BaseModel):
     name: str
@@ -17,6 +17,7 @@ class VoluntarioUpdate(BaseModel):
     availability: Optional[str] = None
     status: Optional[bool] = None
 
+
 class VoluntarioResponse(BaseModel):
     id: int
     name: str
@@ -27,5 +28,15 @@ class VoluntarioResponse(BaseModel):
     status: bool
     data_inscricao: datetime
 
-    class Config: 
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
+
+class VoluntarioPagina(BaseModel):
+    page: int
+    limit: int
+    total: int
+    items: List[VoluntarioResponse]
+
+    model_config = ConfigDict(from_attributes=True)
+
+    # class Config: 
+    #     orm_mode = True

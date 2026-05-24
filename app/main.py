@@ -1,7 +1,8 @@
-from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi import FastAPI, Depends, HTTPException, status, Query
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List, Optional
+
 
 from .database import engine, Base, get_db
 from . import models, schemas
@@ -18,10 +19,28 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/volunteer-list", response_model=List[schemas.VoluntarioResponse])
-def listar_voluntarios(db: Session = Depends(get_db)):
-    voluntarios = db.query(models.VoluntarioModel).all()
-    return voluntarios
+@app.get("/volunteer-list", response_model=schemas.VoluntarioPagina)
+def listar_voluntarios(page: int = Query(1, ge=1),
+    limit: int = Query(5, ge=1, le=100),db: Session = Depends(get_db)):
+    skip = (page - 1) * limit
+
+    query = db.query(models.VoluntarioModel)
+
+    total = query.count()
+
+    voluntarios = (
+        query
+        .offset(skip)
+        .limit(limit)
+        .all()
+    )
+
+    return {
+        "page": page,
+        "limit": limit,
+        "total": total,
+        "items": voluntarios
+    }
 
 @app.get("/volunteer/{id}", response_model=schemas.VoluntarioResponse)
 def buscar_por_id(id: int, db: Session = Depends(get_db)):
