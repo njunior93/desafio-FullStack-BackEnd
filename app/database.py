@@ -11,6 +11,8 @@ if DATABASE_URL and DATABASE_URL.startswith("postgres://"):
 if DATABASE_URL and DATABASE_URL.startswith("postgresql://"):
     DATABASE_URL = DATABASE_URL.replace("postgresql://", "postgresql+psycopg://", 1)
 
+print("DATABASE_URL:", DATABASE_URL)
+
 if not DATABASE_URL:
     DATABASE_URL = "sqlite:///./voluntarios.db"
     engine = create_engine(DATABASE_URL, connect_args={"check_same_thread": False})
