@@ -45,10 +45,9 @@ Esta API permite:
 
 ---
 
-## 📎 Links
+## 📎 Deploy
 
-🔗 FrontEnd: [Link para o Front End](https://github.com/njunior93/desafio_fullStack.git)
-🔗 Deploy: [Link para o Deploy da aplicação](https://crud-gerenciamento-voluntarios.vercel.app/)
+🔗 [Link para o Deploy da aplicação](https://crud-gerenciamento-voluntarios.vercel.app/)
 
 ---
 
