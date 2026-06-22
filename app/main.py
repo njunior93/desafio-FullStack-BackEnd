@@ -2,6 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException, status, Query
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List, Optional
+import os
 
 
 from .database import engine, Base, get_db
@@ -11,9 +12,11 @@ Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="API Gerenciamento de Voluntários")
 
+origins = os.getenv("ALLOWED_ORIGINS", "*").split(",")
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
